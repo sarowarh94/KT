@@ -38,7 +38,7 @@
             box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
         }
         table {
-            margin: 0 auto;
+            margin: 20px auto;
             width: 90%;
             border-collapse: collapse;
             border-radius: 8px;
@@ -62,124 +62,282 @@
         tr:hover {
             background-color: #f1f1f1;
         }
+        
+        /* ট্যাব স্টাইল */
+        .tab {
+            overflow: hidden;
+            border: 1px solid #ccc;
+            background-color: #f1f1f1;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+        .tab button {
+            background-color: inherit;
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 16px;
+            transition: 0.3s;
+            font-size: 16px;
+            font-family: 'Hind Siliguri', sans-serif;
+        }
+        .tab button:hover {
+            background-color: #ddd;
+        }
+        .tab button.active {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .tabcontent {
+            display: none;
+            padding: 6px 12px;
+            animation: fadeEffect 1s;
+        }
+        @keyframes fadeEffect {
+            from {opacity: 0;}
+            to {opacity: 1;}
+        }
+        
+        /* এডিট ফর্ম স্টাইল */
+        .edit-form {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            margin: 20px auto;
+            text-align: left;
+        }
+        .edit-form input, .edit-form select {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .edit-form button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .edit-form button:hover {
+            background-color: #45a049;
+        }
+        .action-buttons button {
+            padding: 5px 10px;
+            margin: 0 5px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        .edit-btn {
+            background-color: #2196F3;
+            color: white;
+        }
+        .delete-btn {
+            background-color: #f44336;
+            color: white;
+        }
     </style>
 </head>
 <body>
 
     <h1>কাজী টেলিকম</h1>
     <h2>আপনার জন্য পরিষ্কার আকাশ ও পরিষ্কার মন কামনা করছি</h2>
-    <div class="search-container">
-        <input type="text" id="searchInput" placeholder="নাম্বার বা সোর্স সার্চ করুন..." onkeyup="filterTable()">
+    
+    <!-- ট্যাব সিস্টেম -->
+    <div class="tab">
+        <button class="tablinks active" onclick="openTab(event, 'viewData')">ডাটা দেখুন</button>
+        <button class="tablinks" onclick="openTab(event, 'editData')">ডাটা সম্পাদনা</button>
     </div>
-    <table id="dataTable">
-        <tr>
-            <th>নাম্বার</th>
-            <th>সোর্স</th>
-            <th>পিন নাম্বার</th>
-        </tr>
-        <tr>
-            <td>01960523052</td>
-            <td>বিকাশ পার্সোনাল</td>
-            <td>45466</td>
-        </tr>
-        <tr>
-            <td>01742711018</td>
-            <td>বিকাশ পার্সোনাল</td>
-            <td>78799</td>
-        </tr>
-        <tr>
-            <td>01609540761</td>
-            <td>বিকাশ এজেন্ট</td>
-            <td>85369</td>
-        </tr>
-        <tr>
-            <td>01600088925</td>
-            <td>বিকাশ পার্সোনাল</td>
-            <td>85369</td>
-        </tr>
-        <tr>
-            <td>01893170905</td>
-            <td>বিকাশ পার্সোনাল</td>
-            <td>85369</td>
-        </tr>
-        <tr>
-            <td>01301955400</td>
-            <td>বিকাশ পার্সোনাল</td>
-            <td>85369</td>
-        </tr>
-        <tr>
-            <td>01788419307</td>
-            <td>বিকাশ পেমেন্ট</td>
-            <td>78799</td>
-        </tr>
-        <tr>
-            <td>01324863810</td>
-            <td>বিকাশ পেমেন্ট</td>
-            <td>85369</td>
-        </tr>
-        <tr>
-            <td>01788420624</td>
-            <td>বিকাশ পেমেন্ট</td>
-            <td>12133</td>
-        </tr>
-        <tr>
-            <td>01336945691</td>
-            <td>বিকাশ পেমেন্ট</td>
-            <td>12133</td>
-        </tr>
-        <tr>
-            <td>01571352110</td>
-            <td>বিকাশ পার্সোনাল</td>
-            <td>85369</td>
-        </tr>
-        <tr>
-            <td>01960523052</td>
-            <td>নগদ এজেন্ট</td>
-            <td>9680</td>
-        </tr>
-        <tr>
-            <td>01609540761</td>
-            <td>নগদ পার্সোনাল</td>
-            <td>3052</td>
-        </tr>
-        <tr>
-            <td>01742711018</td>
-            <td>নগদ পার্সোনাল</td>
-            <td>7110</td>
-        </tr>
-        <tr>
-            <td>01742711018</td>
-            <td>উপায় পার্সোনাল</td>
-            <td>6969</td>
-        </tr>
-        <tr>
-            <td>01960523052</td>
-            <td>উপায় পার্সোনাল</td>
-            <td>6969</td>
-        </tr>
-        <tr>
-            <td>01609540761</td>
-            <td>উপায় এজেন্ট</td>
-            <td>6969</td>
-        </tr>
-         <tr>
-            <td>01742711018</td>
-            <td>রকেট পার্সোনাল</td>
-            <td>6969</td>
-        </tr>
-        <tr>
-            <td>01960523052</td>
-            <td>রকেট পার্সোনাল</td>
-            <td>6969</td>
-        </tr>
-        <tr>
-            <td>01609540761</td>
-            <td>রকেট এজেন্ট</td>
-            <td>6969</td>
-        </tr>
-    </table>
+    
+    <!-- ভিউ ডাটা ট্যাব -->
+    <div id="viewData" class="tabcontent" style="display: block;">
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="নাম্বার বা সোর্স সার্চ করুন..." onkeyup="filterTable()">
+        </div>
+        <table id="dataTable">
+            <tr>
+                <th>নাম্বার</th>
+                <th>সোর্স</th>
+                <th>পিন নাম্বার</th>
+            </tr>
+            <tr>
+                <td>01960523052</td>
+                <td>বিকাশ পার্সোনাল</td>
+                <td>45466</td>
+            </tr>
+            <tr>
+                <td>01742711018</td>
+                <td>বিকাশ পার্সোনাল</td>
+                <td>78799</td>
+            </tr>
+            <tr>
+                <td>01609540761</td>
+                <td>বিকাশ এজেন্ট</td>
+                <td>85369</td>
+            </tr>
+            <tr>
+                <td>01600088925</td>
+                <td>বিকাশ পার্সোনাল</td>
+                <td>85369</td>
+            </tr>
+            <tr>
+                <td>01893170905</td>
+                <td>বিকাশ পার্সোনাল</td>
+                <td>85369</td>
+            </tr>
+            <tr>
+                <td>01301955400</td>
+                <td>বিকাশ পার্সোনাল</td>
+                <td>85369</td>
+            </tr>
+            <tr>
+                <td>01788419307</td>
+                <td>বিকাশ পেমেন্ট</td>
+                <td>78799</td>
+            </tr>
+            <tr>
+                <td>01324863810</td>
+                <td>বিকাশ পেমেন্ট</td>
+                <td>85369</td>
+            </tr>
+            <tr>
+                <td>01788420624</td>
+                <td>বিকাশ পেমেন্ট</td>
+                <td>12133</td>
+            </tr>
+            <tr>
+                <td>01336945691</td>
+                <td>বিকাশ পেমেন্ট</td>
+                <td>12133</td>
+            </tr>
+            <tr>
+                <td>01571352110</td>
+                <td>বিকাশ পার্সোনাল</td>
+                <td>85369</td>
+            </tr>
+            <tr>
+                <td>01960523052</td>
+                <td>নগদ এজেন্ট</td>
+                <td>9680</td>
+            </tr>
+            <tr>
+                <td>01609540761</td>
+                <td>নগদ পার্সোনাল</td>
+                <td>3052</td>
+            </tr>
+            <tr>
+                <td>01742711018</td>
+                <td>নগদ পার্সোনাল</td>
+                <td>7110</td>
+            </tr>
+            <tr>
+                <td>01742711018</td>
+                <td>উপায় পার্সোনাল</td>
+                <td>6969</td>
+            </tr>
+            <tr>
+                <td>01960523052</td>
+                <td>উপায় পার্সোনাল</td>
+                <td>6969</td>
+            </tr>
+            <tr>
+                <td>01609540761</td>
+                <td>উপায় এজেন্ট</td>
+                <td>6969</td>
+            </tr>
+             <tr>
+                <td>01742711018</td>
+                <td>রকেট পার্সোনাল</td>
+                <td>6969</td>
+            </tr>
+            <tr>
+                <td>01960523052</td>
+                <td>রকেট পার্সোনাল</td>
+                <td>6969</td>
+            </tr>
+            <tr>
+                <td>01609540761</td>
+                <td>রকেট এজেন্ট</td>
+                <td>6969</td>
+            </tr>
+        </table>
+    </div>
+    
+    <!-- এডিট ডাটা ট্যাব -->
+    <div id="editData" class="tabcontent">
+        <div class="edit-form">
+            <h3>নতুন ডাটা যোগ করুন</h3>
+            <form id="addDataForm">
+                <label for="number">নাম্বার:</label>
+                <input type="text" id="number" name="number" required>
+                
+                <label for="source">সোর্স:</label>
+                <select id="source" name="source" required>
+                    <option value="">সোর্স নির্বাচন করুন</option>
+                    <option value="বিকাশ পার্সোনাল">বিকাশ পার্সোনাল</option>
+                    <option value="বিকাশ এজেন্ট">বিকাশ এজেন্ট</option>
+                    <option value="বিকাশ পেমেন্ট">বিকাশ পেমেন্ট</option>
+                    <option value="নগদ পার্সোনাল">নগদ পার্সোনাল</option>
+                    <option value="নগদ এজেন্ট">নগদ এজেন্ট</option>
+                    <option value="উপায় পার্সোনাল">উপায় পার্সোনাল</option>
+                    <option value="উপায় এজেন্ট">উপায় এজেন্ট</option>
+                    <option value="রকেট পার্সোনাল">রকেট পার্সোনাল</option>
+                    <option value="রকেট এজেন্ট">রকেট এজেন্ট</option>
+                </select>
+                
+                <label for="pin">পিন নাম্বার:</label>
+                <input type="text" id="pin" name="pin" required>
+                
+                <button type="button" onclick="addData()">যোগ করুন</button>
+            </form>
+        </div>
+        
+        <div class="search-container">
+            <input type="text" id="editSearchInput" placeholder="এডিট করার ডাটা সার্চ করুন..." onkeyup="filterEditTable()">
+        </div>
+        
+        <table id="editTable">
+            <tr>
+                <th>নাম্বার</th>
+                <th>সোর্স</th>
+                <th>পিন নাম্বার</th>
+                <th>অ্যাকশন</th>
+            </tr>
+            <!-- ডাটাগুলো এখানে জাভাস্ক্রিপ্ট দিয়ে যোগ করা হবে -->
+        </table>
+    </div>
 
     <script>
+        // ট্যাব ফাংশনালিটি
+        function openTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.className += " active";
+            
+            // এডিট ট্যাব খুললে টেবিল রিফ্রেশ করবে
+            if(tabName === 'editData') {
+                refreshEditTable();
+            }
+        }
+        
+        // সার্চ ফাংশনালিটি
         function filterTable() {
             const input = document.getElementById('searchInput');
             const filter = input.value.toLowerCase();
@@ -196,6 +354,169 @@
                 }
             }
         }
+        
+        function filterEditTable() {
+            const input = document.getElementById('editSearchInput');
+            const filter = input.value.toLowerCase();
+            const table = document.getElementById('editTable');
+            const tr = table.getElementsByTagName('tr');
+
+            for (let i = 1; i < tr.length; i++) {
+                const td1 = tr[i].getElementsByTagName('td')[0];
+                const td2 = tr[i].getElementsByTagName('td')[1];
+                if (td1 || td2) {
+                    const txtValue1 = td1.textContent || td1.innerText;
+                    const txtValue2 = td2.textContent || td2.innerText;
+                    tr[i].style.display = (txtValue1.toLowerCase().indexOf(filter) > -1 || txtValue2.toLowerCase().indexOf(filter) > -1) ? '' : 'none';
+                }
+            }
+        }
+        
+        // এডিট টেবিলের জন্য ডাটা ম্যানেজমেন্ট
+        let database = [];
+        
+        // প্রাথমিক ডাটা লোড করা
+        function loadInitialData() {
+            const dataTable = document.getElementById('dataTable');
+            const rows = dataTable.getElementsByTagName('tr');
+            
+            for(let i = 1; i < rows.length; i++) {
+                const cells = rows[i].getElementsByTagName('td');
+                database.push({
+                    number: cells[0].textContent,
+                    source: cells[1].textContent,
+                    pin: cells[2].textContent
+                });
+            }
+        }
+        
+        // এডিট টেবিল রিফ্রেশ করা
+        function refreshEditTable() {
+            const editTable = document.getElementById('editTable');
+            // শুধুমাত্র হেডার রাখা এবং বাকি সারিগুলো মুছে ফেলা
+            while(editTable.rows.length > 1) {
+                editTable.deleteRow(1);
+            }
+            
+            // ডাটাবেস থেকে ডাটা যোগ করা
+            database.forEach((item, index) => {
+                const row = editTable.insertRow();
+                row.insertCell(0).textContent = item.number;
+                row.insertCell(1).textContent = item.source;
+                row.insertCell(2).textContent = item.pin;
+                
+                // অ্যাকশন বাটন যোগ করা
+                const actionCell = row.insertCell(3);
+                actionCell.className = "action-buttons";
+                
+                const editBtn = document.createElement('button');
+                editBtn.textContent = "এডিট";
+                editBtn.className = "edit-btn";
+                editBtn.onclick = function() { editData(index); };
+                
+                const deleteBtn = document.createElement('button');
+                deleteBtn.textContent = "ডিলিট";
+                deleteBtn.className = "delete-btn";
+                deleteBtn.onclick = function() { deleteData(index); };
+                
+                actionCell.appendChild(editBtn);
+                actionCell.appendChild(deleteBtn);
+            });
+        }
+        
+        // নতুন ডাটা যোগ করা
+        function addData() {
+            const number = document.getElementById('number').value;
+            const source = document.getElementById('source').value;
+            const pin = document.getElementById('pin').value;
+            
+            if(number && source && pin) {
+                database.push({
+                    number: number,
+                    source: source,
+                    pin: pin
+                });
+                
+                // ফর্ম ক্লিয়ার করা
+                document.getElementById('addDataForm').reset();
+                
+                // টেবিল রিফ্রেশ করা
+                refreshEditTable();
+                
+                // মেইন টেবিলেও আপডেট করা
+                updateMainTable();
+                
+                alert("ডাটা সফলভাবে যোগ করা হয়েছে!");
+            } else {
+                alert("দয়া করে সব ফিল্ড পূরণ করুন!");
+            }
+        }
+        
+        // ডাটা এডিট করা
+        function editData(index) {
+            const item = database[index];
+            
+            // ফর্মে ডাটা লোড করা
+            document.getElementById('number').value = item.number;
+            document.getElementById('source').value = item.source;
+            document.getElementById('pin').value = item.pin;
+            
+            // ডাটা আপডেট করার জন্য কনফার্মেশন
+            if(confirm("আপনি কি এই ডাটা আপডেট করতে চান?")) {
+                item.number = document.getElementById('number').value;
+                item.source = document.getElementById('source').value;
+                item.pin = document.getElementById('pin').value;
+                
+                // ফর্ম ক্লিয়ার করা
+                document.getElementById('addDataForm').reset();
+                
+                // টেবিল রিফ্রেশ করা
+                refreshEditTable();
+                
+                // মেইন টেবিলেও আপডেট করা
+                updateMainTable();
+                
+                alert("ডাটা সফলভাবে আপডেট করা হয়েছে!");
+            }
+        }
+        
+        // ডাটা ডিলিট করা
+        function deleteData(index) {
+            if(confirm("আপনি কি এই ডাটা ডিলিট করতে চান?")) {
+                database.splice(index, 1);
+                
+                // টেবিল রিফ্রেশ করা
+                refreshEditTable();
+                
+                // মেইন টেবিলেও আপডেট করা
+                updateMainTable();
+                
+                alert("ডাটা সফলভাবে ডিলিট করা হয়েছে!");
+            }
+        }
+        
+        // মেইন টেবিল আপডেট করা
+        function updateMainTable() {
+            const dataTable = document.getElementById('dataTable');
+            
+            // শুধুমাত্র হেডার রাখা এবং বাকি সারিগুলো মুছে ফেলা
+            while(dataTable.rows.length > 1) {
+                dataTable.deleteRow(1);
+            }
+            
+            // ডাটাবেস থেকে ডাটা যোগ করা
+            database.forEach(item => {
+                const row = dataTable.insertRow();
+                row.insertCell(0).textContent = item.number;
+                row.insertCell(1).textContent = item.source;
+                row.insertCell(2).textContent = item.pin;
+            });
+        }
+        
+        // পেজ লোড হলে প্রাথমিক ডাটা লোড করা
+        window.onload = function() {
+            loadInitialData();
+        };
     </script>
 
 </body>
