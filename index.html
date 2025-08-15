@@ -100,17 +100,28 @@
             to {opacity: 1;}
         }
         
-        /* এডিট ফর্ম স্টাইল */
-        .edit-form {
+        /* এডিট মোডাল স্টাইল */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+        .modal-content {
             background-color: white;
+            margin: 10% auto;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             max-width: 500px;
-            margin: 20px auto;
             text-align: left;
         }
-        .edit-form input, .edit-form select {
+        .modal-content input, .modal-content select {
             width: 100%;
             padding: 10px;
             margin: 8px 0;
@@ -118,7 +129,7 @@
             border-radius: 4px;
             box-sizing: border-box;
         }
-        .edit-form button {
+        .modal-content button {
             background-color: #4CAF50;
             color: white;
             padding: 10px 15px;
@@ -126,9 +137,10 @@
             border-radius: 4px;
             cursor: pointer;
             margin-top: 10px;
+            margin-right: 10px;
         }
-        .edit-form button:hover {
-            background-color: #45a049;
+        .modal-content button.cancel {
+            background-color: #f44336;
         }
         .action-buttons button {
             padding: 5px 10px;
@@ -155,7 +167,7 @@
     <!-- ট্যাব সিস্টেম -->
     <div class="tab">
         <button class="tablinks active" onclick="openTab(event, 'viewData')">ডাটা দেখুন</button>
-        <button class="tablinks" onclick="openTab(event, 'editData')">ডাটা সম্পাদনা</button>
+        <button class="tablinks" onclick="openTab(event, 'editData')">ডাটা এডিট করুন</button>
     </div>
     
     <!-- ভিউ ডাটা ট্যাব -->
@@ -274,33 +286,6 @@
     
     <!-- এডিট ডাটা ট্যাব -->
     <div id="editData" class="tabcontent">
-        <div class="edit-form">
-            <h3>নতুন ডাটা যোগ করুন</h3>
-            <form id="addDataForm">
-                <label for="number">নাম্বার:</label>
-                <input type="text" id="number" name="number" required>
-                
-                <label for="source">সোর্স:</label>
-                <select id="source" name="source" required>
-                    <option value="">সোর্স নির্বাচন করুন</option>
-                    <option value="বিকাশ পার্সোনাল">বিকাশ পার্সোনাল</option>
-                    <option value="বিকাশ এজেন্ট">বিকাশ এজেন্ট</option>
-                    <option value="বিকাশ পেমেন্ট">বিকাশ পেমেন্ট</option>
-                    <option value="নগদ পার্সোনাল">নগদ পার্সোনাল</option>
-                    <option value="নগদ এজেন্ট">নগদ এজেন্ট</option>
-                    <option value="উপায় পার্সোনাল">উপায় পার্সোনাল</option>
-                    <option value="উপায় এজেন্ট">উপায় এজেন্ট</option>
-                    <option value="রকেট পার্সোনাল">রকেট পার্সোনাল</option>
-                    <option value="রকেট এজেন্ট">রকেট এজেন্ট</option>
-                </select>
-                
-                <label for="pin">পিন নাম্বার:</label>
-                <input type="text" id="pin" name="pin" required>
-                
-                <button type="button" onclick="addData()">যোগ করুন</button>
-            </form>
-        </div>
-        
         <div class="search-container">
             <input type="text" id="editSearchInput" placeholder="এডিট করার ডাটা সার্চ করুন..." onkeyup="filterEditTable()">
         </div>
@@ -314,6 +299,36 @@
             </tr>
             <!-- ডাটাগুলো এখানে জাভাস্ক্রিপ্ট দিয়ে যোগ করা হবে -->
         </table>
+    </div>
+    
+    <!-- এডিট মোডাল -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <h3>ডাটা সম্পাদনা করুন</h3>
+            <form id="editForm">
+                <label for="editNumber">নাম্বার:</label>
+                <input type="text" id="editNumber" name="number" required>
+                
+                <label for="editSource">সোর্স:</label>
+                <select id="editSource" name="source" required>
+                    <option value="বিকাশ পার্সোনাল">বিকাশ পার্সোনাল</option>
+                    <option value="বিকাশ এজেন্ট">বিকাশ এজেন্ট</option>
+                    <option value="বিকাশ পেমেন্ট">বিকাশ পেমেন্ট</option>
+                    <option value="নগদ পার্সোনাল">নগদ পার্সোনাল</option>
+                    <option value="নগদ এজেন্ট">নগদ এজেন্ট</option>
+                    <option value="উপায় পার্সোনাল">উপায় পার্সোনাল</option>
+                    <option value="উপায় এজেন্ট">উপায় এজেন্ট</option>
+                    <option value="রকেট পার্সোনাল">রকেট পার্সোনাল</option>
+                    <option value="রকেট এজেন্ট">রকেট এজেন্ট</option>
+                </select>
+                
+                <label for="editPin">পিন নাম্বার:</label>
+                <input type="text" id="editPin" name="pin" required>
+                
+                <button type="button" onclick="saveEditedData()">সংরক্ষণ করুন</button>
+                <button type="button" class="cancel" onclick="closeEditModal()">বাতিল করুন</button>
+            </form>
+        </div>
     </div>
 
     <script>
@@ -374,6 +389,7 @@
         
         // এডিট টেবিলের জন্য ডাটা ম্যানেজমেন্ট
         let database = [];
+        let currentEditIndex = -1;
         
         // প্রাথমিক ডাটা লোড করা
         function loadInitialData() {
@@ -412,7 +428,7 @@
                 const editBtn = document.createElement('button');
                 editBtn.textContent = "এডিট";
                 editBtn.className = "edit-btn";
-                editBtn.onclick = function() { editData(index); };
+                editBtn.onclick = function() { openEditModal(index); };
                 
                 const deleteBtn = document.createElement('button');
                 deleteBtn.textContent = "ডিলিট";
@@ -424,60 +440,46 @@
             });
         }
         
-        // নতুন ডাটা যোগ করা
-        function addData() {
-            const number = document.getElementById('number').value;
-            const source = document.getElementById('source').value;
-            const pin = document.getElementById('pin').value;
-            
-            if(number && source && pin) {
-                database.push({
-                    number: number,
-                    source: source,
-                    pin: pin
-                });
-                
-                // ফর্ম ক্লিয়ার করা
-                document.getElementById('addDataForm').reset();
-                
-                // টেবিল রিফ্রেশ করা
-                refreshEditTable();
-                
-                // মেইন টেবিলেও আপডেট করা
-                updateMainTable();
-                
-                alert("ডাটা সফলভাবে যোগ করা হয়েছে!");
-            } else {
-                alert("দয়া করে সব ফিল্ড পূরণ করুন!");
-            }
+        // এডিট মোডাল খোলা
+        function openEditModal(index) {
+            currentEditIndex = index;
+            const item = database[index];
+            document.getElementById('editNumber').value = item.number;
+            document.getElementById('editSource').value = item.source;
+            document.getElementById('editPin').value = item.pin;
+            document.getElementById('editModal').style.display = 'block';
         }
         
-        // ডাটা এডিট করা
-        function editData(index) {
-            const item = database[index];
+        // এডিট মোডাল বন্ধ করা
+        function closeEditModal() {
+            document.getElementById('editModal').style.display = 'none';
+            currentEditIndex = -1;
+        }
+        
+        // এডিট করা ডাটা সংরক্ষণ
+        function saveEditedData() {
+            if(currentEditIndex === -1) return;
             
-            // ফর্মে ডাটা লোড করা
-            document.getElementById('number').value = item.number;
-            document.getElementById('source').value = item.source;
-            document.getElementById('pin').value = item.pin;
+            const number = document.getElementById('editNumber').value;
+            const source = document.getElementById('editSource').value;
+            const pin = document.getElementById('editPin').value;
             
-            // ডাটা আপডেট করার জন্য কনফার্মেশন
-            if(confirm("আপনি কি এই ডাটা আপডেট করতে চান?")) {
-                item.number = document.getElementById('number').value;
-                item.source = document.getElementById('source').value;
-                item.pin = document.getElementById('pin').value;
-                
-                // ফর্ম ক্লিয়ার করা
-                document.getElementById('addDataForm').reset();
-                
-                // টেবিল রিফ্রেশ করা
-                refreshEditTable();
-                
-                // মেইন টেবিলেও আপডেট করা
-                updateMainTable();
-                
-                alert("ডাটা সফলভাবে আপডেট করা হয়েছে!");
-            }
+            database[currentEditIndex] = {
+                number: number,
+                source: source,
+                pin: pin
+            };
+            
+            // টেবিল রিফ্রেশ করা
+            refreshEditTable();
+            
+            // মেইন টেবিলেও আপডেট করা
+            updateMainTable();
+            
+            // মোডাল বন্ধ করা
+            closeEditModal();
+            
+            alert("ডাটা সফলভাবে আপডেট করা হয়েছে!");
         }
         
         // ডাটা ডিলিট করা
@@ -516,6 +518,14 @@
         // পেজ লোড হলে প্রাথমিক ডাটা লোড করা
         window.onload = function() {
             loadInitialData();
+        };
+        
+        // মোডাল বাইরে ক্লিক করলে বন্ধ করার ফাংশন
+        window.onclick = function(event) {
+            const modal = document.getElementById('editModal');
+            if (event.target === modal) {
+                closeEditModal();
+            }
         };
     </script>
 
